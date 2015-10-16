@@ -14,22 +14,14 @@ var rxOptionalID = regexp.MustCompile(`^\d*$`)
 
 func handleHi(w http.ResponseWriter, r *http.Request) {
 
-	//耗时
-	//	if match, _ := regexp.MatchString(`^\w*$`, r.FormValue("color")); !match {
-	//		http.Error(w, "Optional color is invalid", http.StatusBadRequest)
-	//		return
-	//	}
-
-	//fix
 	if !rxOptionalID.MatchString(r.FormValue("color")) {
 		http.Error(w, "Optional color is invalid", http.StatusBadRequest)
 		return
 	}
 
-	num := atomic.AddInt64(&visitors, 1)
+    num := atomic.AddInt64(&visitors, 1)
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Write([]byte(fmt.Sprintf("<h1 style='color:%s'>Welcome!</h1>You are visitor number %d!", r.FormValue("color"), num)))
+    fmt.Fprintf(w, "<html><h1 stype='color: \"%s\"'>Welcome!</h1>You are visitor number %d!", r.FormValue("color"), num)
 }
 
 func main() {
