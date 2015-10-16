@@ -43,6 +43,6 @@ $ go test -bench=. -memprofile=prof.mem | tee mem.3
 $ benchcmp step0/mem.0 step3/mem.3
 
 
-并行分析
+并行分析 step6
 
 $ go test -bench=Parallel -blockprofile=prof.block
