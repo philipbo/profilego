@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"strings"
-	"sync"
+	//"sync"
 	"testing"
 )
 
@@ -54,7 +54,7 @@ func TestHandleHi_TestServer(t *testing.T) {
 
 }
 
-func TestHandleHi_TestServer_Parallel(t *testing.T) {
+/*func TestHandleHi_TestServer_Parallel(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(handleHi))
 	defer ts.Close()
 	var wg sync.WaitGroup
@@ -86,7 +86,7 @@ func TestHandleHi_TestServer_Parallel(t *testing.T) {
 
 	wg.Wait()
 
-}
+}*/
 
 func BenchmarkHi(b *testing.B) {
 	b.ReportAllocs()
@@ -111,4 +111,16 @@ func reset(rw *httptest.ResponseRecorder) {
 		Body:      body,
 		HeaderMap: m,
 	}
+}
+
+func BenchmarkHiParallel(b *testing.B) {
+	r := req(b, "GET / HTTP/1.0\r\n\r\n")
+
+	b.RunParallel(func(pb *testing.PB) {
+		rw := httptest.NewRecorder()
+		for pb.Next() {
+			handleHi(rw, r)
+			reset(rw)
+		}
+	})
 }

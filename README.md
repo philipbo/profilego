@@ -19,7 +19,7 @@ $ go tool pprof xxx.test prof.cpu
 
 (pprof) top
 
-(pprof) top –cum
+(pprof) top –cum  10 可以指定数字，按排名
 
 (pprof) list handleHi
 
@@ -41,3 +41,8 @@ $ go test -bench=. -memprofile=prof.mem | tee mem.2
 $ go test -bench=. -memprofile=prof.mem | tee mem.3
 
 $ benchcmp step0/mem.0 step3/mem.3
+
+
+并行分析
+
+$ go test -bench=Parallel -blockprofile=prof.block

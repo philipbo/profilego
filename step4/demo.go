@@ -10,11 +10,11 @@ import (
 
 var visitors int64
 
-var rxOptionalID = regexp.MustCompile(`^\d*$`)
+var colorRx = regexp.MustCompile(`\w*$`)
 
 func handleHi(w http.ResponseWriter, r *http.Request) {
 
-	if !rxOptionalID.MatchString(r.FormValue("color")) {
+	if !colorRx.MatchString(r.FormValue("color")) {
 		http.Error(w, "Optional color is invalid", http.StatusBadRequest)
 		return
 	}
