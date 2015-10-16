@@ -5,9 +5,10 @@ import (
 	"log"
 	"net/http"
 	"regexp"
+	"sync/atomic"
 )
 
-var visitors int
+var visitors int64
 
 func handleHi(w http.ResponseWriter, r *http.Request) {
 	if match, _ := regexp.MatchString(`^\w*$`, r.FormValue("color")); !match {
@@ -15,9 +16,16 @@ func handleHi(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	visitors++
+	//visitors++  //此处存在竟争
+	//fix
+	//1.使用channel
+	//2.使用Mutex
+	//3.使用atomic
+
+	num := atomic.AddInt64(&visitors, 1)
+
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Write([]byte(fmt.Sprintf("<h1 style='color:%s'>Welcome!</h1>You are visitor number %d!", r.FormValue("color"), visitors)))
+	w.Write([]byte(fmt.Sprintf("<h1 style='color:%s'>Welcome!</h1>You are visitor number %d!", r.FormValue("color"), num)))
 }
 
 func main() {

@@ -10,17 +10,14 @@ import (
 
 var visitors int64
 
+var rxOptionalID = regexp.MustCompile(`^\d*$`)
+
 func handleHi(w http.ResponseWriter, r *http.Request) {
-	if match, _ := regexp.MatchString(`^\w*$`, r.FormValue("color")); !match {
+
+	if !rxOptionalID.MatchString(r.FormValue("color")) {
 		http.Error(w, "Optional color is invalid", http.StatusBadRequest)
 		return
 	}
-
-	//visitors++  //此处存在竟争
-	//fix
-	//1.使用channel
-	//2.使用Mutex
-	//3.使用atomic
 
 	num := atomic.AddInt64(&visitors, 1)
 
