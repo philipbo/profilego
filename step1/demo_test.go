@@ -91,3 +91,12 @@ func TestHandleHi_TestServer_Parallel(t *testing.T) {
 	wg.Wait()
 
 }
+
+func BenchmarkHi(b *testing.B) {
+	b.ReportAllocs()
+	r := req(b, "GET / HTTP/1.0\r\n\r\n")
+	for i := 0; i < b.N; i++ {
+		rw := httptest.NewRecorder()
+		handleHi(rw, r)
+	}
+}

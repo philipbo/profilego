@@ -56,3 +56,12 @@ func TestHandleHi_TestServer(t *testing.T) {
 	t.Logf("Got: %s", slurp)
 
 }
+
+func BenchmarkHi(b *testing.B) {
+	b.ReportAllocs()
+	r := req(b, "GET / HTTP/1.0\r\n\r\n")
+	for i := 0; i < b.N; i++ {
+		rw := httptest.NewRecorder()
+		handleHi(rw, r)
+	}
+}
