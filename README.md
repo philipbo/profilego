@@ -1,3 +1,14 @@
+## 学习Go程序调试、分析与优化
+
+此demo基于:  
+1. bradfitz   https://github.com/bradfitz/talk-yapc-asia-2015  
+2. Tony Bai blog http://tonybai.com/2015/08/25/go-debugging-profiling-optimization/  
+
+感谢!
+
+$ go version 
+go version go1.5.1 darwin/amd64 
+
 $ go test -v
 
 #### Race Detector
