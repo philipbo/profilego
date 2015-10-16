@@ -21,8 +21,7 @@ func handleHi(w http.ResponseWriter, r *http.Request) {
 
 	num := atomic.AddInt64(&visitors, 1)
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Write([]byte(fmt.Sprintf("<h1 style='color:%s'>Welcome!</h1>You are visitor number %d!", r.FormValue("color"), num)))
+	fmt.Fprintf(w, "<html><h1 stype='color: %s'>Welcome!</h1>You are visitor number %d!", r.FormValue("color"), num)
 }
 
 func main() {

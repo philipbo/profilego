@@ -28,3 +28,16 @@ $ go tool pprof xxx.test prof.cpu
 $ go test -v -run=^$ -bench=^BenchmarkHi$ -benchtime=2s -memprofile=prof.mem
 
 $ go tool pprof -alloc_space xxx.test prof.mem
+
+#### install benchcmp  
+
+需要自行搭梯子
+
+go get golang.org/x/tools/cmd/benchcmp
+
+$ go test -bench=. -memprofile=prof.mem | tee mem.0
+$ go test -bench=. -memprofile=prof.mem | tee mem.1
+$ go test -bench=. -memprofile=prof.mem | tee mem.2
+$ go test -bench=. -memprofile=prof.mem | tee mem.3
+
+$ benchcmp step0/mem.0 step3/mem.3

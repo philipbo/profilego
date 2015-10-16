@@ -6,3 +6,4 @@ build
 *.cpu
 *.test
 *.mem
+mem.*
