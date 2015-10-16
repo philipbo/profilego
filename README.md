@@ -22,3 +22,9 @@ $ go tool pprof xxx.test prof.cpu
 (pprof) top –cum
 
 (pprof) list handleHi
+
+#### Memory profiling
+
+$ go test -v -run=^$ -bench=^BenchmarkHi$ -benchtime=2s -memprofile=prof.mem
+
+$ go tool pprof -alloc_space xxx.test prof.mem

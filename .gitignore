@@ -3,3 +3,6 @@ out
 .DS_Store
 build
 *.iml
+*.cpu
+*.test
+*.mem
