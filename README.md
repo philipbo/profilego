@@ -1,8 +1,8 @@
 ## 学习Go程序调试、分析与优化
 
 此demo基于:  
-1. bradfitz   https://github.com/bradfitz/talk-yapc-asia-2015  
-2. Tony Bai blog http://tonybai.com/2015/08/25/go-debugging-profiling-optimization/  
+1. bradfitz   [https://github.com/bradfitz/talk-yapc-asia-2015](https://github.com/bradfitz/talk-yapc-asia-2015)    
+2. Tony Bai blog [http://tonybai.com/2015/08/25/go-debugging-profiling-optimization/](http://tonybai.com/2015/08/25/go-debugging-profiling-optimization/)    
 
 感谢!
 
@@ -46,10 +46,10 @@ $ go tool pprof -alloc_space xxx.test prof.mem
 
 go get golang.org/x/tools/cmd/benchcmp
 
-$ go test -bench=. -memprofile=prof.mem | tee mem.0
-$ go test -bench=. -memprofile=prof.mem | tee mem.1
-$ go test -bench=. -memprofile=prof.mem | tee mem.2
-$ go test -bench=. -memprofile=prof.mem | tee mem.3
+$ go test -bench=. -memprofile=prof.mem | tee mem.0  
+$ go test -bench=. -memprofile=prof.mem | tee mem.1  
+$ go test -bench=. -memprofile=prof.mem | tee mem.2  
+$ go test -bench=. -memprofile=prof.mem | tee mem.3  
 
 $ benchcmp step0/mem.0 step3/mem.3
 
