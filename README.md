@@ -1,6 +1,6 @@
 $ go test -v
 
-#### Race Detector(竞态分析）
+#### Race Detector
  
 $ go test -v -race
 
