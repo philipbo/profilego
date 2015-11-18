@@ -1,4 +1,4 @@
-## 学习Go程序调试、分析与优化
+## Go程序调试、分析与优化
 
 此demo基于:  
 1. bradfitz   [https://github.com/bradfitz/talk-yapc-asia-2015](https://github.com/bradfitz/talk-yapc-asia-2015)    
